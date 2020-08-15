@@ -36,6 +36,17 @@ const routes: Routes = [
     loadChildren: () =>
       import(`../app/login/login.module`).then((m) => m.LoginModule),
   },
+
+  {
+    path: '',
+    redirectTo: '/dashboard',
+    pathMatch: 'full',
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import(`../app/dashboard/dashboard.module`).then((m) => m.DashboardModule),
+  },
 ];
 
 @NgModule({

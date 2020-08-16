@@ -4,6 +4,17 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
+    redirectTo: '/login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import(`../app/login/login.module`).then((m) => m.LoginModule),
+  },
+
+  {
+    path: '',
     redirectTo: '/admin',
     pathMatch: 'full',
   },
@@ -28,29 +39,21 @@ const routes: Routes = [
 
   {
     path: '',
-    redirectTo: '/login',
-    pathMatch: 'full',
-  },
-  {
-    path: 'login',
-    loadChildren: () =>
-      import(`../app/login/login.module`).then((m) => m.LoginModule),
-  },
-
-  {
-    path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full',
   },
   {
     path: 'dashboard',
     loadChildren: () =>
-      import(`../app/dashboard/dashboard.module`).then((m) => m.DashboardModule),
+      import(`../app/dashboard/dashboard.module`).then(
+        (m) => m.DashboardModule
+      ),
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
+  
 })
 export class AppRoutingModule {}

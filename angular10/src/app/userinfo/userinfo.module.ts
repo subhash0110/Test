@@ -1,6 +1,6 @@
+import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import{MaterialModule} from '../material/material.module'
 import { UserinfoRoutingModule } from './userinfo-routing.module';
 import { LoginComponent } from './login/login.component';
 
@@ -10,7 +10,7 @@ import { LoginComponent } from './login/login.component';
   imports: [
     CommonModule,
     UserinfoRoutingModule,
-    MaterialModule
+    SharedModule
   ]
 })
 export class UserinfoModule { }

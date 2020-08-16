@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginService } from './shared/login.service';
+import { BoardComponent } from './dashboard/board/board.component';
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],

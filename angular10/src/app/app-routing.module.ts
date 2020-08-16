@@ -48,7 +48,24 @@ const routes: Routes = [
       import(`../app/dashboard/dashboard.module`).then(
         (m) => m.DashboardModule
       ),
+    
   },
+
+
+  {
+    path: '',
+    redirectTo: '/product',
+    pathMatch: 'full',
+  },
+  {
+    path: 'product',
+    loadChildren: () =>
+      import(`../app/product/product.module`).then(
+        (m) => m.ProductModule
+      ),
+    
+  },
+  
 ];
 
 @NgModule({

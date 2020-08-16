@@ -1,18 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CategoryService } from 'src/app/shared/category.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-board',
+  selector: 'board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css'],
 })
 export class BoardComponent implements OnInit {
-  categories$;
-  @Input('category') category;
-
-  constructor(categoryService: CategoryService) {
-    this.categories$ = categoryService.getAll();
+  constructor(private router: Router) {
+    
   }
+  ngOnInit(): void {
 
-  ngOnInit(): void {}
+
+   //this.router.navigate(['/product']);
+  }
 }

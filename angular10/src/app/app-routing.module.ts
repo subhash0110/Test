@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { Dashboard1Component } from './dashboard1/dashboard1.component';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () =>
       import(`../app/login/login.module`).then((m) => m.LoginModule),
+    // canActivate: [Dashboard1Component]
   },
 
   {
@@ -38,19 +40,9 @@ const routes: Routes = [
   },
 
   {
-    path: '',
-    redirectTo: '/dashboard',
-    pathMatch: 'full',
-  },
-  {
     path: 'dashboard',
-    loadChildren: () =>
-      import(`../app/dashboard/dashboard.module`).then(
-        (m) => m.DashboardModule
-      ),
-    
+    component: Dashboard1Component,
   },
-
 
   {
     path: '',
@@ -60,17 +52,25 @@ const routes: Routes = [
   {
     path: 'product',
     loadChildren: () =>
-      import(`../app/product/product.module`).then(
-        (m) => m.ProductModule
-      ),
-    
+      import(`../app/product/product.module`).then((m) => m.ProductModule),
   },
-  
+
+  {
+    path: '',
+    redirectTo: '/pcard',
+    pathMatch: 'full',
+  },
+  {
+    path: 'pcard',
+    loadChildren: () =>
+      import(`../app/product-card1/product-card1.module`).then(
+        (m) => m.ProductCard1Module
+      ),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  
 })
 export class AppRoutingModule {}

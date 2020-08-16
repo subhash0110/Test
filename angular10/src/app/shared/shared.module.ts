@@ -1,4 +1,3 @@
-import { DashboardModule } from './../dashboard/dashboard.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSliderModule } from '@angular/material/slider';
@@ -97,7 +96,7 @@ const MaterialComponent = [
 
 @NgModule({
   declarations: [],
-  imports: [BrowserModule, FormsModule, HttpClientModule, MaterialComponent,DashboardModule],
+  imports: [BrowserModule, FormsModule, HttpClientModule, MaterialComponent],
   providers: [],
   exports: [MaterialComponent],
 })

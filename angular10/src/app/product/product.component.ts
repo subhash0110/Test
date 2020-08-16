@@ -1,3 +1,4 @@
+import { NavbarService } from './../shared/navbar.service';
 import { ShoppingCartService } from './../shared/shopping-cart.service';
 import { ProductService } from './../shared/product.service';
 import { ShoppingCart } from './../models/shopping-cart';
@@ -21,10 +22,14 @@ export class ProductComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private shoppingCartService: ShoppingCartService
-  ) {}
+    private shoppingCartService: ShoppingCartService,
+    private nvSrvc:NavbarService
+  ) {
+
+  }
 
   async ngOnInit() {
+    this.nvSrvc.show();
     this.cart$ = await this.shoppingCartService.getCart();
     this.populateProducts();
   }

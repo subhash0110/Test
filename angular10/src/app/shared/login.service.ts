@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class LoginService {
+
   constructor(private router: Router) {}
 
   login() {

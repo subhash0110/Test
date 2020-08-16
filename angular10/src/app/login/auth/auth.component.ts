@@ -1,3 +1,4 @@
+import { NavbarService } from './../../shared/navbar.service';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/shared/login.service';
 
@@ -7,11 +8,15 @@ import { LoginService } from 'src/app/shared/login.service';
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent implements OnInit {
-  constructor(private auth: LoginService) {}
+  constructor(private auth: LoginService,private nvSrvc:NavbarService) {}
 
-  ngOnInit(): void {}
+
+  ngOnInit(): void {
+    this.nvSrvc.hide();
+  }
 
   login() {
+    
     this.auth.login();
   }
 }

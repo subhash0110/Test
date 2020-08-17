@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { CategoryService } from 'src/app/shared/category.service';
 import { NavbarService } from 'src/app/shared/navbar.service';
 
@@ -13,9 +13,17 @@ export class PlistComponent implements OnInit {
 
   constructor(
     private categoryService: CategoryService,
-    private nvSrvc:NavbarService
+    private nvSrvc: NavbarService
   ) {
     var category = this.category;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    // Input change handling logic goes here
+
+    if (changes) {
+      var res = changes;
+    }
   }
 
   ngOnInit(): void {

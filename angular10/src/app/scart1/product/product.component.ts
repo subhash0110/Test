@@ -45,13 +45,13 @@ export class ProductComponent implements OnInit {
       )
       .subscribe((params) => {
         this.category = params.get('category');
-        // this.applyFilter();
+         this.applyFilter();
       });
   }
 
-  // private applyFilter() {
-  //   this.filteredProducts = this.category
-  //     ? this.products.filter((p) => p.category === this.category)
-  //     : this.products;
-  // }
+  private applyFilter() {
+    this.filteredProducts = this.category
+      ? this.products.filter((p) => p.category === this.category)
+      : this.products;
+  }
 }

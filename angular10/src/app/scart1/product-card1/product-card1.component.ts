@@ -22,7 +22,7 @@ export class ProductCard1Component implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     // Input change handling logic goes here   
 
-    if (changes.repoLimit) {
+    if (changes) {
       var res = changes
     }  
   }

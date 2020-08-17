@@ -15,6 +15,7 @@ export class PlistComponent implements OnInit {
     private categoryService: CategoryService,
     private nvSrvc:NavbarService
   ) {
+    var category = this.category;
   }
 
   ngOnInit(): void {

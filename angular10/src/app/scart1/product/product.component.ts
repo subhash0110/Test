@@ -1,12 +1,12 @@
-import { NavbarService } from './../shared/navbar.service';
-import { ShoppingCartService } from './../shared/shopping-cart.service';
-import { ProductService } from './../shared/product.service';
-import { ShoppingCart } from './../models/shopping-cart';
-import { Product } from './../models/product';
-import { Component, OnInit } from '@angular/core';
+import { ShoppingCartService } from './../../shared/shopping-cart.service';
+import { ProductService } from './../../shared/product.service';
+import { ShoppingCart } from './../../models/shopping-cart';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/models/product';
+import { NavbarService } from 'src/app/shared/navbar.service';
 
 @Component({
   selector: 'product',
@@ -45,13 +45,13 @@ export class ProductComponent implements OnInit {
       )
       .subscribe((params) => {
         this.category = params.get('category');
-        this.applyFilter();
+        // this.applyFilter();
       });
   }
 
-  private applyFilter() {
-    this.filteredProducts = this.category
-      ? this.products.filter((p) => p.category === this.category)
-      : this.products;
-  }
+  // private applyFilter() {
+  //   this.filteredProducts = this.category
+  //     ? this.products.filter((p) => p.category === this.category)
+  //     : this.products;
+  // }
 }

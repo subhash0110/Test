@@ -9,6 +9,6 @@ export class LoginService {
   constructor(private router: Router) {}
 
   login() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/product']);
   }
 }

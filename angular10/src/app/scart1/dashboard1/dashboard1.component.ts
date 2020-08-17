@@ -1,5 +1,5 @@
-import { NavbarService } from './../shared/navbar.service';
 import { Component, OnInit } from '@angular/core';
+import { NavbarService } from 'src/app/shared/navbar.service';
 
 @Component({
   selector: 'dashboard1',

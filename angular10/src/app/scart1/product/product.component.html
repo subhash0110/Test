@@ -5,7 +5,7 @@
         <plist [category]="category"></plist>
     </div>
     <div class="col-6">
-        <div class="row" *ngIf="cart$ | async as cart">
+        <div class="row" *ngIf="cart">
             <ng-container *ngFor="let p of filteredProducts; let i = index">
                 <div class="col">
                     <product-card1 [product]="p" [shopping-cart]="shoppingCart"></product-card1>

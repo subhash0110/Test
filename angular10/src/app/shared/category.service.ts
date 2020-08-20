@@ -10,24 +10,22 @@ export class CategoryService {
   constructor() {}
 
   getAll(): any {
-    return of(
-      (this.category = [
-        {
-          name: 'Bread',
-        },
-        {
-          name: 'Dairy',
-        },
-        {
-          name: 'Fruits',
-        },
-        {
-          name: 'Seasonings',
-        },
-        {
-          name: 'Vegetables',
-        },
-      ])
-    );
+    return of([
+      {
+        name: 'bread',
+      },
+      {
+        name: 'dairy',
+      },
+      {
+        name: 'fruits',
+      },
+      {
+        name: 'seasonings',
+      },
+      {
+        name: 'vegetables',
+      },
+    ]);
   }
 }

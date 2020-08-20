@@ -8,19 +8,16 @@ import { NavbarService } from 'src/app/shared/navbar.service';
   styleUrls: ['./plist.component.css'],
 })
 export class PlistComponent implements OnInit {
-  categories$: any = [];
+  categories: any;
   @Input('category') category;
 
   constructor(
     private categoryService: CategoryService,
     private nvSrvc: NavbarService
   ) {
-    var category = this.category;
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // Input change handling logic goes here
-
     if (changes) {
       var res = changes;
     }
@@ -30,7 +27,7 @@ export class PlistComponent implements OnInit {
     this.nvSrvc.show();
     this.categoryService.getAll().subscribe(
       (data) => {
-        this.categories$.push(data);
+        this.categories = data;
       },
       (err) => console.error(err),
       () => console.log('getBooks completed')

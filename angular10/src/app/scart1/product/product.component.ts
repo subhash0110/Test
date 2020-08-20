@@ -17,20 +17,20 @@ export class ProductComponent implements OnInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
   category: string;
-  cart$: Observable<ShoppingCart>;
+  cart: any;
 
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
     private shoppingCartService: ShoppingCartService,
-    private nvSrvc:NavbarService
-  ) {
-
-  }
+    private nvSrvc: NavbarService
+  ) {}
 
   async ngOnInit() {
     this.nvSrvc.show();
-    this.cart$ = await this.shoppingCartService.getCart();
+    await this.shoppingCartService.getCart().subscribe((ref) => {
+      this.cart = ref;
+    });
     this.populateProducts();
   }
 
@@ -45,7 +45,7 @@ export class ProductComponent implements OnInit {
       )
       .subscribe((params) => {
         this.category = params.get('category');
-         this.applyFilter();
+        this.applyFilter();
       });
   }
 

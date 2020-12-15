@@ -8,8 +8,9 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginService } from './shared/login.service';
 import { Dashboard1Component } from './scart1/dashboard1/dashboard1.component';
+import { MatTableComponent } from './mat-table/mat-table.component';
 @NgModule({
-  declarations: [AppComponent,Dashboard1Component],
+  declarations: [AppComponent,Dashboard1Component, MatTableComponent],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [LoginService,CategoryService,NavbarService],
   bootstrap: [AppComponent],

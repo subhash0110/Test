@@ -1,3 +1,4 @@
+import { MatTableComponent } from './mat-table/mat-table.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { Dashboard1Component } from './scart1/dashboard1/dashboard1.component';
@@ -25,7 +26,12 @@ const routes: Routes = [
     path:'product',
     component: ProductComponent
   }
+,
 
+  {
+    path:'mattab',
+    component: MatTableComponent
+  }
 ];
 
 @NgModule({

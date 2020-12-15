@@ -17,5 +17,6 @@ import { AuthComponent } from './auth/auth.component';
     ProductCard1Component,
   ],
   imports: [CommonModule, Scart1RoutingModule],
+  exports: [Scart1RoutingModule]
 })
 export class Scart1Module {}

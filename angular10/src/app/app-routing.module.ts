@@ -18,20 +18,18 @@ const routes: Routes = [
   },
 
   {
-    path:'dashboard',
-    component: Dashboard1Component
+    path: 'dashboard',
+    component: Dashboard1Component,
   },
 
   {
-    path:'product',
-    component: ProductComponent
-  }
-,
-
+    path: 'product',
+    component: ProductComponent,
+  },
   {
-    path:'mattab',
-    component: MatTableComponent
-  }
+    path: 'mattab',
+    component: MatTableComponent,
+  },
 ];
 
 @NgModule({

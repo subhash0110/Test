@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginService } from './shared/login.service';
 import { Dashboard1Component } from './scart1/dashboard1/dashboard1.component';
 import { MatTableComponent } from './mat-table/mat-table.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [AppComponent, Dashboard1Component, MatTableComponent],
   imports: [
@@ -20,6 +21,8 @@ import { MatTableComponent } from './mat-table/mat-table.component';
     BrowserAnimationsModule,
     MatTableModule,
     MaterialModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [LoginService, CategoryService, NavbarService, Emp1Service],
   bootstrap: [AppComponent],

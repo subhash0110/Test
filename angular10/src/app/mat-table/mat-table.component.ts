@@ -19,6 +19,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 const ELEMENT_DATA: PeriodicElement[] = [
   { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
@@ -49,19 +50,40 @@ const ELEMENT_DATA: PeriodicElement[] = [
   ],
 })
 export class MatTableComponent implements AfterViewInit, OnChanges {
-  constructor(private service: Emp1Service) {}
+  frmStampingSearch: FormGroup;
+  ctrlAddChk = new FormControl(false);
+  chkAll = false;
+
+
+  constructor(private service: Emp1Service, private fb: FormBuilder) {
+
+
+
+    this.frmStampingSearch = this.fb.group({
+      'ctrlChk': this.ctrlAddChk,
+    });
+  }
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey: string;
 
-  columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
+  grouped = true;
+  headers = true;
+  selectedItems: any[] = [];
+
+  columnsToDisplay = ['select','name', 'weight', 'symbol', 'position'];
+
 
   expandedElement: PeriodicElement | null;
 
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
 
+
+  selectforCheck(objEvent){
+    this.chkAll = objEvent.target.checked;
+  }
   testClick(element) {
     console.log(element);
   }
@@ -73,6 +95,13 @@ export class MatTableComponent implements AfterViewInit, OnChanges {
   }
   ngOnChanges(changes: SimpleChanges) {
     console.log(changes);
+  }
+
+  setGroups(groupsOn: boolean) {
+    this.grouped = groupsOn;
+  }
+  setHeaders(headersOn: boolean) {
+    this.headers = headersOn;
   }
 
   masterToggle(event) {

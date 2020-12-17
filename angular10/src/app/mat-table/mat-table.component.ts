@@ -19,20 +19,13 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-];
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-mat-table',
@@ -50,42 +43,176 @@ const ELEMENT_DATA: PeriodicElement[] = [
   ],
 })
 export class MatTableComponent implements AfterViewInit, OnChanges {
-  frmStampingSearch: FormGroup;
-  ctrlAddChk = new FormControl(false);
-  chkAll = false;
+  formGrp: FormGroup;
+  select = new FormControl('select');
+  name = new FormControl('name');
+  weight = new FormControl('weight');
+  symbol = new FormControl('symbol');
+  position = new FormControl('position');
 
-
-  constructor(private service: Emp1Service, private fb: FormBuilder) {
-
-
-
-    this.frmStampingSearch = this.fb.group({
-      'ctrlChk': this.ctrlAddChk,
-    });
-  }
+  colCheck = new FormControl('colCheck');
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey: string;
 
-  grouped = true;
-  headers = true;
+  row = false;
+  headers = false;
   selectedItems: any[] = [];
 
-  columnsToDisplay = ['select','name', 'weight', 'symbol', 'position'];
-
+  columnsToDisplay = ['select', 'name', 'weight', 'symbol', 'position'];
 
   expandedElement: PeriodicElement | null;
 
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  eleDatata: PeriodicElement[] = [
+    {
+      select: { value: '', rowCheck: false },
+      position: { value: 1, rowCheck: false },
+      name: { value: 'Hydrogen', rowCheck: false },
+      weight: { value: 1.0079, rowCheck: false },
+      symbol: { value: 'H', rowCheck: false },
+      colCheck: false,
+    },
+    {
+      select: { value: '', rowCheck: false },
+      position: { value: 2, rowCheck: false },
+      name: { value: 'Helium', rowCheck: false },
+      weight: { value: 4.0079, rowCheck: false },
+      symbol: { value: 'He', rowCheck: false },
+      colCheck: false,
+    },
+    {
+      select: { value: '', rowCheck: false },
+      position: { value: 3, rowCheck: false },
+      name: { value: 'Lithium', rowCheck: false },
+      weight: { value: 4.0079, rowCheck: false },
+      symbol: { value: 'Li', rowCheck: false },
+      colCheck: false,
+    },
+    {
+      select: { value: '', rowCheck: false },
+      position: { value: 4, rowCheck: false },
+      name: { value: 'Beryllium', rowCheck: false },
+      weight: { value: 4.0079, rowCheck: false },
+      symbol: { value: 'Be', rowCheck: false },
+      colCheck: false,
+    },
+    {
+      select: { value: '', rowCheck: false },
+      position: { value: 5, rowCheck: false },
+      name: { value: 'Boron', rowCheck: false },
+      weight: { value: 4.0079, rowCheck: false },
+      symbol: { value: 'B', rowCheck: false },
+      colCheck: false,
+    },
+    {
+      select: { value: '', rowCheck: false },
+      position: { value: 6, rowCheck: false },
+      name: { value: 'Carbon', rowCheck: false },
+      weight: { value: 4.0079, rowCheck: false },
+      symbol: { value: 'C', rowCheck: false },
+      colCheck: false,
+    },
+    {
+      select: { value: '', rowCheck: false },
+      position: { value: 7, rowCheck: false },
+      name: { value: 'Oxygen', rowCheck: false },
+      weight: { value: 4.0079, rowCheck: false },
+      symbol: { value: 'O', rowCheck: false },
+      colCheck: false,
+    },
+    {
+      select: { value: '', rowCheck: false },
+      position: { value: 8, rowCheck: false },
+      name: { value: 'Fluorine', rowCheck: false },
+      weight: { value: 4.0079, rowCheck: false },
+      symbol: { value: 'F', rowCheck: false },
+      colCheck: false,
+    },
+  ];
+
+  dataSource = new MatTableDataSource<PeriodicElement>(this.eleDatata);
   selection = new SelectionModel<PeriodicElement>(true, []);
 
+  dataele = new FormControl({
+    eleData: [this.eleDatata],
+  });
+  chkAll = '';
+  eleDatata1 = [];
 
-  selectforCheck(objEvent){
-    this.chkAll = objEvent.target.checked;
+  constructor(private service: Emp1Service, private fb: FormBuilder) {
+    this.formGrp = this.fb.group({
+      memberDetails: this.fb.array([]),
+    });
   }
+
+  test1(arg1) {
+    console.log(arg1);
+  }
+  ngOnInit() {
+    this.formGrp = this.fb.group({
+      memberDetails: this.fb.array(
+        this.eleDatata.map((x) =>
+          this.fb.group({
+            name: [x.name],
+            position: [x.position],
+            select: [x.select],
+            symbol: [x.symbol],
+            weight: [x.weight],
+            colCheck: [x.colCheck],
+          })
+        )
+      ),
+    });
+
+    // this.formGrp = this.fb.group({
+    //   memberDetails: this.fb.array(
+    //     this.eleDatata.map((x) =>
+    //       this.fb.group({
+    //         name: [x.name, { rowcolCheck: false }],
+    //         position: [x.position, { rowcolCheck: false }],
+    //         select: [x.select, { rowcolCheck: false }],
+    //         symbol: [x.symbol, { rowcolCheck: false }],
+    //         weight: [x.weight, { rowcolCheck: false }],
+    //         colCheck: [x.colCheck, { rowcolCheck: false }],
+    //       })
+    //     )
+    //   ),
+    // });
+
+    console.log(this.formGrp);
+  }
+
+  submitHead(arg1, arg2) {
+    // console.log();
+    // arg2.colCheck = true;
+    // if(arg2 == 'select'){
+    //   this.row = true;
+    // }
+    // ((this.formGrp.get('controls') as FormArray).at(arg2.position) as FormGroup)
+    //   .get('colCheck')
+    //   .patchValue(true);
+    // this.formGrp.get('memberDetails').value.forEach(x => {
+    // });
+  }
+
+  submitCell(arg1, arg2) {
+    // console.log();
+  }
+  selectforcolCheck(objEvent) {
+    // this.chkAll = objEvent.target.colChecked;
+  }
+  colCheckCol(arg1, arg2) {}
+
+  //for logging element entry
   testClick(element) {
     console.log(element);
+
+    Object.keys(element).forEach(key => {
+      this.eleDatata1.push(element[key]);
+    });
+
+    var res = this.eleDatata1;
   }
 
   isAllSelected() {
@@ -98,7 +225,7 @@ export class MatTableComponent implements AfterViewInit, OnChanges {
   }
 
   setGroups(groupsOn: boolean) {
-    this.grouped = groupsOn;
+    // this.grouped = groupsOn;
   }
   setHeaders(headersOn: boolean) {
     this.headers = headersOn;
@@ -112,7 +239,7 @@ export class MatTableComponent implements AfterViewInit, OnChanges {
         });
   }
 
-  checkboxLabel(row?: PeriodicElement): string {
+  colCheckboxLabel(row?: PeriodicElement): string {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     } else {

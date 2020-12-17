@@ -5,26 +5,25 @@
     <div class="mat-elevation-z8">
 
 
-
         <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="mat-elevation-z8">
+            <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay;let $index=index">
 
-            <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay;let i = index">
 
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column}}
-                </th>
+                <form [formGroup]="formGrp" #frmEle="ngForm">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="submitHead(frmEle,column)">
+                        {{column}}
+                        <input type="checkbox" [checked]="column.isSelected" title="Check" (change)="checkCol(column,$event);">
+                    </th>
 
-                <td mat-cell *matCellDef="let element"> {{element[column]}}
-                </td>
+                    <td mat-cell *matCellDef="let element" (click)="submitCell(frmEle,element)">
+                        {{element[column].value}}
+                        <input type="checkbox" [checked]="element.isSelected == true" title="Check" (change)="checkCol(element[column],$event);">
+                    </td>
+                </form>
+
             </ng-container>
 
 
-            <ng-container matColumnDef="checkbox">
-                <td mat-cell *matCellDef="let element">
-                    <div class="example-element-select">
-                        <input type="checkbox" [checked]="element.isSelected" title="Check" (change)="selectforCheck($event);">
-                    </div>
-                </td>
-            </ng-container>
 
 
 
@@ -33,10 +32,9 @@
                 <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
                     <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                         <div class="example-element-diagram">
-                            <div class="example-element-position"> {{element.position}} </div>
-                            <div class="example-element-symbol"> {{element.symbol}} </div>
-                            <div class="example-element-name"> {{element.name}} </div>
-                            <!-- <div class="example-element-weight"> {{element.weight}} </div> -->
+                            <div class="example-element-position"> {{element.position.value}} </div>
+                            <div class="example-element-symbol"> {{element.symbol.value}} </div>
+                            <div class="example-element-name"> {{element.name.value}} </div>
                         </div>
                         <div class="example-element-description">
                             {{element.description}}
@@ -45,19 +43,19 @@
                 </td>
             </ng-container>
 
-
             <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-            <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="testClick(element)" (click)="expandedElement = expandedElement === element ? null : element">
+            <tr mat-row *matRowDef="let element; columns: columnsToDisplay;let $index=index" class="example-element-row " [class.example-expanded-row]="expandedElement===element
+                " (click)="testClick(element) " (click)="expandedElement=expandedElement===element ? null : element ">
+
+                <!-- <div [formGroupName]="$index ">
+                </div> -->
             </tr>
-            <tr mat-row *matRowDef="let row; columns: ['checkbox','expandedDetail']" class="example-detail-row"></tr>
-
-
-
+            <tr mat-row *matRowDef="let row; columns: [ 'expandedDetail'] " class="example-detail-row "></tr>
 
 
         </table>
 
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20] " showFirstLastButtons></mat-paginator>
 
     </div>
 </div>

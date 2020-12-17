@@ -1,6 +1,10 @@
 export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  select:any
+  name: any;
+  position: any;
+  weight: any;
+  symbol: any;
+  colCheck:boolean;
+  // rowCheck:boolean
+
 }
